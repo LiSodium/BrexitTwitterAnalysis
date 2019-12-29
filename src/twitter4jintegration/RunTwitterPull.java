@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map.Entry;
 
 import twitter4j.TwitterException;
+import utilities.FileIO;
 
 /**
  * Class that contains main method to run Twitter query. Pulls tweet objects and stores them into a JSON file.

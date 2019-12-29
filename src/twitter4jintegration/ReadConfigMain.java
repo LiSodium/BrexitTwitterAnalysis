@@ -5,7 +5,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 /**
- * Class that contains methods to read values from properties file
+ * Class that contains methods to read values from properties file.
  * @author Lina
  *
  */
