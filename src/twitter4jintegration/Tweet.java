@@ -1,5 +1,6 @@
 package twitter4jintegration;
 
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -10,14 +11,15 @@ import java.util.Date;
 
 public class Tweet implements Comparable<Object> {
 	private String text;
-	private Date createdAt;
+	private Calendar createdAt;
 	private long retweetCount;
 	private TwitterUser user;
 	private long tweetId;
 
 	public Tweet(String text, Date createdAt, long retweetCount, TwitterUser user, long tweetId) {
 		this.text = text;
-		this.createdAt = createdAt;
+		this.createdAt = Calendar.getInstance();
+		this.createdAt.setTime(createdAt);
 		this.retweetCount = retweetCount;
 		this.user = user;
 		this.tweetId = tweetId;
@@ -42,7 +44,7 @@ public class Tweet implements Comparable<Object> {
 		return user;
 	}
 
-	public Date getCreatedAt() {
+	public Calendar getCreatedAt() {
 		return createdAt;
 	}
 
@@ -63,9 +65,9 @@ public class Tweet implements Comparable<Object> {
 
 	public int compareTo(Object other) {
 		Tweet otherTweet = (Tweet) other;
-		if (otherTweet.getCreatedAt().getTime() == this.getCreatedAt().getTime()) {
+		if (this.getCreatedAt().compareTo(otherTweet.getCreatedAt()) == 0) {
 			return 0;
-		} else if (this.getCreatedAt().getTime() - otherTweet.getCreatedAt().getTime() < 0) {
+		} else if (this.getCreatedAt().compareTo(otherTweet.getCreatedAt()) < 0) {
 			return -1;
 		}
 		return 1;

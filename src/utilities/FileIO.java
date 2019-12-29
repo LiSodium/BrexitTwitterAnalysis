@@ -6,7 +6,7 @@ import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Map.Entry;
 import java.util.Scanner;
@@ -77,13 +77,13 @@ public class FileIO {
 		while (importReader.hasNextLine()) {
 			boolean isValidDatapoint = true;
 			double openBidQuote = 0;
-			Date date = null;
+			Calendar date = Calendar.getInstance();
 			String[] dataRow = importReader.nextLine().split(";");
 			// Concatenate timezone to end of date
 			dataRow[0] = dataRow[0] + "-0500";
 
 			try {
-				date = formatter.parse(dataRow[0]);
+				date.setTime(formatter.parse(dataRow[0]));
 				openBidQuote = Double.parseDouble(dataRow[1]);
 			} catch (ParseException | NumberFormatException e) {
 				isValidDatapoint = false;
@@ -102,7 +102,7 @@ public class FileIO {
 		try {
 			ArrayList<ForexDatapoint> datapoints = FileIO.importForexData("DAT_ASCII_GBPUSD_M1_2016.csv");
 			for (ForexDatapoint datapoint:datapoints) {
-				System.out.println("Date: " + datapoint.getDate().toString() + " Open Bid: " + datapoint.getOpenBidQuote());
+				System.out.println("Date: " + datapoint.getDate().getTime().toString() + " Open Bid: " + datapoint.getOpenBidQuote());
 			}
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
