@@ -68,7 +68,7 @@ public class FileIO {
 		return words;
 	}
 
-	public static ArrayList<ForexDatapoint> importForexData(String filename) throws FileNotFoundException {
+	public static ArrayList<ForexDatapoint> importForexDataFileReader(String filename) throws FileNotFoundException {
 		File importFile = new File(filename);
 		Scanner importReader = new Scanner(importFile);
 		ArrayList<ForexDatapoint> datapoints = new ArrayList<ForexDatapoint>();
@@ -100,7 +100,7 @@ public class FileIO {
 	
 	public static void main(String[] args) {
 		try {
-			ArrayList<ForexDatapoint> datapoints = FileIO.importForexData("DAT_ASCII_GBPUSD_M1_2016.csv");
+			ArrayList<ForexDatapoint> datapoints = FileIO.importForexDataFileReader("DAT_ASCII_GBPUSD_M1_2016.csv");
 			for (ForexDatapoint datapoint:datapoints) {
 				System.out.println("Date: " + datapoint.getDate().getTime().toString() + " Open Bid: " + datapoint.getOpenBidQuote());
 			}

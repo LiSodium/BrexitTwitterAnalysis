@@ -25,7 +25,7 @@ class TwitterUtilsTest {
 			exception = e;
 		}
 
-		assertEquals(exception instanceof TwitterException, true);
+		assertEquals(true, exception instanceof TwitterException);
 	}
 
 	@Test
