@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class ForexUtils {
-	private final static int millisecondsInMinute = 60000;
+	public final static long millisecondsInMinute = 60000;
 
-	public static ArrayList<ForexDatapoint> filterDatapoints(ArrayList<ForexDatapoint> datapoints, int timeInterval,
+	public static ArrayList<ForexDatapoint> getRelevantDatapoints(ArrayList<ForexDatapoint> datapoints, int timeInterval,
 			double percentChange) {
 		ArrayList<ForexDatapoint> filteredDatapoints = new ArrayList<ForexDatapoint>();
 

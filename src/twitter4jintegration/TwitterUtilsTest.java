@@ -15,7 +15,7 @@ class TwitterUtilsTest {
 
 	@Test
 	void testGetUser() {
-		String screennames = "not_a_real_user_CIS591";
+		String screennames = "not_a_real_user_BrexitTwitterAnalysis";
 
 		Exception exception = null;
 
@@ -46,9 +46,9 @@ class TwitterUtilsTest {
 
 	@Test
 	void testGetTweetsSinceId() throws TwitterException {
-		String screennames = "BorisJohnson";
-
-		ArrayList<TwitterUser> users = TwitterUtils.getUsers(screennames);
+		TwitterUser u1 = new TwitterUser("BorisJohnson", null, 0, null);
+		ArrayList<TwitterUser> users = new ArrayList<TwitterUser>();
+		users.add(u1);
 
 		ArrayList<Tweet> tweets = TwitterUtils.getTweets(users, 678912676806946816l, 688912676806946816l);
 
@@ -58,9 +58,9 @@ class TwitterUtilsTest {
 
 	@Test
 	void testGetTweetSinceId() throws TwitterException {
-		String screennames = "BorisJohnson";
-
-		ArrayList<TwitterUser> users = TwitterUtils.getUsers(screennames);
+		TwitterUser u1 = new TwitterUser("BorisJohnson", null, 0, null);
+		ArrayList<TwitterUser> users = new ArrayList<TwitterUser>();
+		users.add(u1);
 
 		ArrayList<Tweet> tweets = TwitterUtils.getTweets(users, 678912676806946815l, 678912676806946817l);
 
@@ -70,9 +70,10 @@ class TwitterUtilsTest {
 
 	@Test
 	void testGetEmptyTweetsSinceId() throws TwitterException {
-		String screennames = "BorisJohnson";
-
-		ArrayList<TwitterUser> users = TwitterUtils.getUsers(screennames);
+		TwitterUser u1 = new TwitterUser("BorisJohnson", null, 0, null);
+		ArrayList<TwitterUser> users = new ArrayList<TwitterUser>();
+		users.add(u1);
+		
 		ArrayList<Tweet> tweets = TwitterUtils.getTweets(users, 1l, 1l);
 
 		assertEquals(0, tweets.size());
