@@ -29,7 +29,7 @@ public class RunFxRateTweetAnalysis {
 			boolean isValidPercentInput = false;
 			double percent = 0.0;
 			while (!isValidPercentInput) {
-				System.out.println("Enter a percent threshold to search: (e.g. .01 indicates 1%):");
+				System.out.println("Enter a percent threshold to search: (e.g. .01 indicates .01%):");
 				String percentInput = in.nextLine();
 				try {
 					percent = Double.parseDouble(percentInput);

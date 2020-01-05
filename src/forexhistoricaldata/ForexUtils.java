@@ -23,10 +23,10 @@ public class ForexUtils {
 
 					if (percentChange > 0) {
 						meetsPercentThreshold = (datapoint.getOpenBidQuote() - beginningPoint.getOpenBidQuote())
-								/ beginningPoint.getOpenBidQuote() >= percentChange;
+								/ beginningPoint.getOpenBidQuote() >= percentChange / 100;
 					} else {
 						meetsPercentThreshold = (datapoint.getOpenBidQuote() - beginningPoint.getOpenBidQuote())
-								/ beginningPoint.getOpenBidQuote() <= percentChange;
+								/ beginningPoint.getOpenBidQuote() <= percentChange / 100;
 					}
 
 					if (meetsPercentThreshold) {
