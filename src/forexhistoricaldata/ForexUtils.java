@@ -17,7 +17,7 @@ public class ForexUtils {
 			for (ForexDatapoint datapoint : datapoints) {
 				boolean meetsTimeThreshold = datapoint.getDate().getTimeInMillis()
 						- beginningPoint.getDate().getTimeInMillis() >= timeInterval * millisecondsInMinute;
-
+				
 				if (meetsTimeThreshold) {
 					boolean meetsPercentThreshold;
 

@@ -62,7 +62,7 @@ public class FileIO {
 		Scanner importReader = new Scanner(importFile);
 		HashSet<String> words = new HashSet<String>();
 		while (importReader.hasNextLine()) {
-			words.add(importReader.nextLine());
+			words.add(importReader.nextLine().toLowerCase());
 		}
 		importReader.close();
 		return words;
@@ -96,17 +96,5 @@ public class FileIO {
 		}
 		importReader.close();
 		return datapoints;
-	}
-	
-	public static void main(String[] args) {
-		try {
-			ArrayList<ForexDatapoint> datapoints = FileIO.importForexDataFileReader("DAT_ASCII_GBPUSD_M1_2016.csv");
-			for (ForexDatapoint datapoint:datapoints) {
-				System.out.println("Date: " + datapoint.getDate().getTime().toString() + " Open Bid: " + datapoint.getOpenBidQuote());
-			}
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 }

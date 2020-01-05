@@ -79,8 +79,8 @@ public class FxRateTweetAnalysis {
 			String tweetText = tweet.getText();
 			String[] words = tweetText.split("[^A-Za-z0-9']+"); //alphanumeric characters only
 			for (String word : words) {
+				word = word.toLowerCase();
 				if (!word.equals("") && !commonWordSet.contains(word)) {
-					word = word.toLowerCase();
 					if (wordFrequencyMap.containsKey(word)) {
 						wordFrequencyMap.put(word, wordFrequencyMap.get(word) + 1);
 					} else {

@@ -30,7 +30,7 @@ public class RunFxRateTweetAnalysis {
 			double percent = 0.0;
 			while (!isValidPercentInput) {
 				System.out.println("Enter a percent threshold to search: (e.g. .01 indicates 1%):");
-				String percentInput = "-" + in.nextLine();
+				String percentInput = in.nextLine();
 				try {
 					percent = Double.parseDouble(percentInput);
 					isValidPercentInput = true;
@@ -54,9 +54,9 @@ public class RunFxRateTweetAnalysis {
 			}
 
 			ArrayList<ForexDatapoint> allDatapoints = FileIO.importForexDataFileReader("DAT_ASCII_GBPUSD_M1_2016.csv");
-			ArrayList<ForexDatapoint> relevantDatapoints = ForexUtils.getRelevantDatapoints(allDatapoints, minutes, percent);
+			ArrayList<ForexDatapoint> relevantDatapoints = ForexUtils.getRelevantDatapoints(allDatapoints, 1, percent);
 
-			ArrayList<Tweet> tweetsOfInterest = FxRateTweetAnalysis.getRelevantTweets(relevantDatapoints, tweets, 60);
+			ArrayList<Tweet> tweetsOfInterest = FxRateTweetAnalysis.getRelevantTweets(relevantDatapoints, tweets, minutes);
 
 			HashSet<String> commonWordSet = FileIO.importWordFileReader("words.txt");
 			HashMap<String, Integer> wordMap = FxRateTweetAnalysis.getWordFrequencyMap(tweetsOfInterest, commonWordSet);
