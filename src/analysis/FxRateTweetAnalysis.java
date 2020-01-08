@@ -2,7 +2,6 @@ package analysis;
 
 import java.util.ArrayList;
 
-
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
@@ -15,7 +14,9 @@ import forexhistoricaldata.ForexUtils;
 import twitter4jintegration.Tweet;
 
 /**
- * Class that integrates the FXRate and Twitter classes. Performs analysis of tweets
+ * Class that integrates the FXRate and Twitter classes. Performs analysis of
+ * tweets
+ * 
  * @author Lina
  *
  */
@@ -35,31 +36,23 @@ public class FxRateTweetAnalysis {
 	 * @return list of tweets created around the times when the FX rate changed
 	 *         significantly
 	 */
-	public static ArrayList<Tweet> getRelevantTweets(ArrayList<ForexDatapoint> timesOfInterest, ArrayList<Tweet> allTweets,
-			int timeIntervalInMinutes) {
+	public static ArrayList<Tweet> getRelevantTweets(ArrayList<ForexDatapoint> timesOfInterest,
+			ArrayList<Tweet> allTweets, int timeIntervalInMinutes) {
 		ArrayList<Tweet> relevantTweets = new ArrayList<Tweet>();
 		int timeIndex = 0;
 		int tweetIndex = 0;
-		/*
-		 * 1. Check datapoint against tweet
-		 * 2. If the tweet is within the given time interval, add it to list, check the next tweet
-		 * 3. If the tweet is in a greater time interval (meaning the datapoint is too small), go to the next datapoint
-		 * 4. If the tweet is in a less time interval (meaning the datapoint is too big), go to the next tweet
-		 * 5. when there are no more tweets & dates to compare, exit loop
-		 * */
-		
-		while(timeIndex < timesOfInterest.size() && tweetIndex < allTweets.size()) {
-			long timeDifference = allTweets.get(tweetIndex).getCreatedAt().getTimeInMillis() - timesOfInterest.get(timeIndex).getDate().getTimeInMillis(); 
+
+		while (timeIndex < timesOfInterest.size() && tweetIndex < allTweets.size()) {
+			long timeDifference = allTweets.get(tweetIndex).getCreatedAt().getTimeInMillis()
+					- timesOfInterest.get(timeIndex).getDate().getTimeInMillis();
 			long timeIntervalInMillis = timeIntervalInMinutes * ForexUtils.millisecondsInMinute;
-			
-			if(Math.abs(timeDifference) <= timeIntervalInMillis) {
+
+			if (Math.abs(timeDifference) <= timeIntervalInMillis) {
 				relevantTweets.add(allTweets.get(tweetIndex));
 				tweetIndex++;
-			}
-			else if(timeDifference < 0){
+			} else if (timeDifference < 0) {
 				tweetIndex++;
-			}
-			else {
+			} else {
 				timeIndex++;
 			}
 		}
@@ -67,7 +60,8 @@ public class FxRateTweetAnalysis {
 	}
 
 	/**
-	 * Compiles a map of words from tweets in a specified time interval excluded from a common word set
+	 * Compiles a map of words from tweets in a specified time interval excluded
+	 * from a common word set
 	 * 
 	 * @param tweets
 	 *            list of tweet objects
@@ -77,7 +71,7 @@ public class FxRateTweetAnalysis {
 		HashMap<String, Integer> wordFrequencyMap = new HashMap<String, Integer>();
 		for (Tweet tweet : tweets) {
 			String tweetText = tweet.getText();
-			String[] words = tweetText.split("[^A-Za-z']+"); //Keep English alphabet and apostrophe characters only
+			String[] words = tweetText.split("[^A-Za-z']+"); // Keep English alphabet and apostrophe characters only
 			for (String word : words) {
 				word = word.toLowerCase();
 				if (!word.equals("") && !commonWordSet.contains(word)) {
