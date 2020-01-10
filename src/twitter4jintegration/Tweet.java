@@ -4,8 +4,10 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * A wrapper class created for twitter4j.Status that stores tweet information used in Twitter analysis.
- * @author Lina 
+ * A wrapper class created for twitter4j.Status that stores tweet information
+ * used in Twitter analysis.
+ * 
+ * @author Lina
  * 
  */
 

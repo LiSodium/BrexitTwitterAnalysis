@@ -1,6 +1,6 @@
 package analysis;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -23,7 +23,7 @@ import twitter4jintegration.Tweet;
 class FxRateTweetAnalysisTest {
 	@Test
 	void testGetRelevantTweets() {
-		
+
 		Calendar c1 = Calendar.getInstance();
 		c1.setTimeInMillis(0);
 		Calendar c2 = Calendar.getInstance();
@@ -50,7 +50,7 @@ class FxRateTweetAnalysisTest {
 		Tweet t2 = new Tweet(null, c3.getTime(), 0l, null, 0l);
 		Tweet t3 = new Tweet(null, c5.getTime(), 0l, null, 0l);
 		Tweet t4 = new Tweet(null, c6.getTime(), 0l, null, 0l);
-		
+
 		ArrayList<Tweet> tweets = new ArrayList<Tweet>();
 		tweets.add(t1);
 		tweets.add(t2);

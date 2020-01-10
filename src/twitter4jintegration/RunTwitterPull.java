@@ -2,15 +2,14 @@ package twitter4jintegration;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Map.Entry;
 
 import twitter4j.TwitterException;
 import utilities.FileIO;
 
 /**
- * Class that contains main method to run Twitter query. Pulls tweet objects and stores them into a JSON file.
+ * Class that contains main method to run Twitter query. Pulls tweet objects and
+ * stores them into a JSON file.
+ * 
  * @author Lina
  *
  */

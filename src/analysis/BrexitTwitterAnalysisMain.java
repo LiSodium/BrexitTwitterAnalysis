@@ -6,6 +6,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map.Entry;
 
 import javax.swing.JButton;
@@ -17,13 +20,56 @@ import javax.swing.JTextPane;
 import javax.swing.SpringLayout;
 import javax.swing.SwingConstants;
 
+import forexhistoricaldata.ForexDatapoint;
+import forexhistoricaldata.ForexUtils;
+import twitter4jintegration.Tweet;
 import utilities.FileIO;
 
-public class Display {
+/**
+ * Main class to execute application
+ * 
+ * @author Lina
+ *
+ */
+public class BrexitTwitterAnalysisMain {
 
 	private JFrame frame;
 	private JTextField textFieldPercentChange;
 	private JTextField textFieldTimeFrame;
+
+	/**
+	 * Compiles a list of words from tweets that meet the criteria of forex data
+	 * points specified.
+	 * 
+	 * @param percentChange
+	 *            percent difference between two sequential forex data points
+	 * @param timeFrame
+	 *            time frame since forex data points from which to query tweets
+	 * @param tweetFilename
+	 *            import file of tweets
+	 * @param wordFilename
+	 *            import file of common words to exclude from analysis
+	 * @param dataFilename
+	 *            import file of forex data points
+	 * @return list of words meeting the criteria specified
+	 * @throws FileNotFoundException
+	 */
+	public static ArrayList<Entry<String, Integer>> runFxRateTweetAnalysis(double percentChange, int timeFrame,
+			String tweetFilename, String wordFilename, String dataFilename) throws FileNotFoundException {
+		ArrayList<Tweet> tweets = FileIO.importTweetFileReader(tweetFilename);
+		ArrayList<ForexDatapoint> allDatapoints = FileIO.importForexDataFileReader(dataFilename);
+		ArrayList<ForexDatapoint> relevantDatapoints = ForexUtils.getRelevantDatapoints(allDatapoints, 1,
+				percentChange);
+
+		ArrayList<Tweet> tweetsOfInterest = FxRateTweetAnalysis.getRelevantTweets(relevantDatapoints, tweets,
+				timeFrame);
+
+		HashSet<String> commonWordSet = FileIO.importWordFileReader(wordFilename);
+		HashMap<String, Integer> wordMap = FxRateTweetAnalysis.getWordFrequencyMap(tweetsOfInterest, commonWordSet);
+		ArrayList<Entry<String, Integer>> wordList = FxRateTweetAnalysis.getSortedWordFrequencyList(wordMap);
+
+		return wordList;
+	}
 
 	/**
 	 * Launch the application.
@@ -32,7 +78,7 @@ public class Display {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Display window = new Display();
+					BrexitTwitterAnalysisMain window = new BrexitTwitterAnalysisMain();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -44,7 +90,7 @@ public class Display {
 	/**
 	 * Create the application.
 	 */
-	public Display() {
+	public BrexitTwitterAnalysisMain() {
 		initialize();
 	}
 
@@ -79,7 +125,8 @@ public class Display {
 		frame.getContentPane().add(lblTimeFrame);
 
 		textFieldTimeFrame = new JTextField();
-		springLayout.putConstraint(SpringLayout.SOUTH, textFieldPercentChange, -8, SpringLayout.NORTH, textFieldTimeFrame);
+		springLayout.putConstraint(SpringLayout.SOUTH, textFieldPercentChange, -8, SpringLayout.NORTH,
+				textFieldTimeFrame);
 		springLayout.putConstraint(SpringLayout.WEST, textFieldTimeFrame, 44, SpringLayout.EAST, lblTimeFrame);
 		springLayout.putConstraint(SpringLayout.SOUTH, textFieldTimeFrame, 0, SpringLayout.SOUTH, lblTimeFrame);
 		springLayout.putConstraint(SpringLayout.NORTH, textFieldTimeFrame, -1, SpringLayout.NORTH, lblTimeFrame);
@@ -121,8 +168,8 @@ public class Display {
 				try {
 					percentChange = Double.parseDouble(textFieldPercentChange.getText());
 					timeFrame = Integer.parseInt(textFieldTimeFrame.getText());
-					ArrayList<Entry<String, Integer>> result = FxRateTweetAnalysisMain.runFxRateTweetAnalysis(
-							percentChange, timeFrame, "tweets.txt", "words.txt", "DAT_ASCII_GBPUSD_M1_2016.csv");
+					ArrayList<Entry<String, Integer>> result = runFxRateTweetAnalysis(percentChange, timeFrame,
+							"tweets.txt", "words.txt", "DAT_ASCII_GBPUSD_M1_2016.csv");
 					if (topResult > result.size()) {
 						topResult = result.size();
 					}
@@ -133,8 +180,9 @@ public class Display {
 						printToScreen += result.get(i).getKey();
 					}
 					textPaneResult.setText(printToScreen);
-					FileIO.exportResultsFileWriter(result, "results.txt");
-					JOptionPane.showMessageDialog(null, "Success! Please see results.txt for further analysis.");
+					FileIO.exportResultsFileWriter(result,
+							"results_" + Calendar.getInstance().getTimeInMillis() + ".txt");
+					JOptionPane.showMessageDialog(null, "Success! Please see outputted file for further analysis.");
 				} catch (NumberFormatException e) {
 					JOptionPane.showMessageDialog(null, "Invalid input. Please try again.");
 				} catch (FileNotFoundException e) {

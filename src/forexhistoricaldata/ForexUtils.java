@@ -6,8 +6,8 @@ import java.util.Collections;
 public class ForexUtils {
 	public final static long millisecondsInMinute = 60000;
 
-	public static ArrayList<ForexDatapoint> getRelevantDatapoints(ArrayList<ForexDatapoint> datapoints, int timeInterval,
-			double percentChange) {
+	public static ArrayList<ForexDatapoint> getRelevantDatapoints(ArrayList<ForexDatapoint> datapoints,
+			int timeInterval, double percentChange) {
 		ArrayList<ForexDatapoint> filteredDatapoints = new ArrayList<ForexDatapoint>();
 
 		if (datapoints.size() > 0) {
@@ -17,7 +17,7 @@ public class ForexUtils {
 			for (ForexDatapoint datapoint : datapoints) {
 				boolean meetsTimeThreshold = datapoint.getDate().getTimeInMillis()
 						- beginningPoint.getDate().getTimeInMillis() >= timeInterval * millisecondsInMinute;
-				
+
 				if (meetsTimeThreshold) {
 					boolean meetsPercentThreshold;
 

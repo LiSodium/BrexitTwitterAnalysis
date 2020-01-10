@@ -1,6 +1,6 @@
 package utilities;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -11,6 +11,12 @@ import org.junit.jupiter.api.Test;
 import forexhistoricaldata.ForexDatapoint;
 import twitter4jintegration.Tweet;
 
+/**
+ * JUnit tests for FileIO class methods
+ * 
+ * @author Lina
+ *
+ */
 class FileIOTest {
 
 	@Test

@@ -8,7 +8,7 @@ import java.util.Calendar;
  * @author Lina
  *
  */
-public class ForexDatapoint implements Comparable<Object>{
+public class ForexDatapoint implements Comparable<Object> {
 	private Calendar date;
 	private double openBidQuote;
 
@@ -24,7 +24,7 @@ public class ForexDatapoint implements Comparable<Object>{
 	public double getOpenBidQuote() {
 		return openBidQuote;
 	}
-	
+
 	public int compareTo(Object other) {
 		ForexDatapoint otherForexDatapoint = (ForexDatapoint) other;
 		if (this.getDate().compareTo(otherForexDatapoint.getDate()) == 0) {

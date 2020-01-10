@@ -1,14 +1,11 @@
 package forexhistoricaldata;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Calendar;
 
 import org.junit.jupiter.api.Test;
-
-import utilities.FileIO;
 
 class ForexUtilsTest {
 
@@ -43,7 +40,7 @@ class ForexUtilsTest {
 
 		assertEquals(3, datapointsWithinTimeCriteria.size());
 	}
-	
+
 	@Test
 	void testGetRelevantDatapointsPercentChange() {
 
@@ -71,7 +68,8 @@ class ForexUtilsTest {
 		datapoints.add(d4);
 		datapoints.add(d5);
 
-		ArrayList<ForexDatapoint> datapointsWithinPercentCriteria = ForexUtils.getRelevantDatapoints(datapoints, 1, 0.10);
+		ArrayList<ForexDatapoint> datapointsWithinPercentCriteria = ForexUtils.getRelevantDatapoints(datapoints, 1,
+				0.10);
 
 		assertEquals(3, datapointsWithinPercentCriteria.size());
 	}

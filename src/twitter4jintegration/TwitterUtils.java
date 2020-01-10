@@ -6,7 +6,6 @@ import java.util.List;
 import twitter4j.Paging;
 import twitter4j.Query;
 import twitter4j.QueryResult;
-import twitter4j.ResponseList;
 import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
@@ -15,6 +14,7 @@ import twitter4j.User;
 
 /**
  * Class that contains methods to run Twitter queries
+ * 
  * @author Lina
  *
  */
@@ -70,8 +70,7 @@ public class TwitterUtils {
 		}
 		return tweets;
 	}
-	
-	
+
 	/**
 	 * Gets a list of tweets for users between the specified tweet ids
 	 * 

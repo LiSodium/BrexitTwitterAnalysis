@@ -1,13 +1,17 @@
 package twitter4jintegration;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.ArrayList;
+
 import org.junit.jupiter.api.Test;
 
 import twitter4j.TwitterException;
+
 /**
- * JUnit tests for TwitterUtil class
+ * JUnit tests for TwitterUtil class methods
+ * 
  * @author Lina
  *
  */
@@ -73,7 +77,7 @@ class TwitterUtilsTest {
 		TwitterUser u1 = new TwitterUser("BorisJohnson", null, 0, null);
 		ArrayList<TwitterUser> users = new ArrayList<TwitterUser>();
 		users.add(u1);
-		
+
 		ArrayList<Tweet> tweets = TwitterUtils.getTweets(users, 1l, 1l);
 
 		assertEquals(0, tweets.size());

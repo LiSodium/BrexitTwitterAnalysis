@@ -1,8 +1,10 @@
 package twitter4jintegration;
 
 /**
- * A wrapper class created for twitter4j.User that stores user information used in Twitter analysis.
- * @author Lina 
+ * A wrapper class created for twitter4j.User that stores user information used
+ * in Twitter analysis.
+ * 
+ * @author Lina
  * 
  */
 public class TwitterUser {

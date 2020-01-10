@@ -6,6 +6,7 @@ import java.util.Properties;
 
 /**
  * Class that contains methods to read values from properties file.
+ * 
  * @author Lina
  *
  */
