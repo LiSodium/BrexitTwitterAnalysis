@@ -15,7 +15,7 @@ import forexhistoricaldata.ForexDatapoint;
 import twitter4jintegration.Tweet;
 
 /**
- * JUnit tests for analysis methods
+ * JUnit tests for FxRateTweetAnalysis class methods
  * 
  * @author Lina
  *

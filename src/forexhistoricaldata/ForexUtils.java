@@ -3,9 +3,27 @@ package forexhistoricaldata;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * Class that contains methods to run forex data point queries
+ * 
+ * @author Lina
+ *
+ */
 public class ForexUtils {
 	public final static long millisecondsInMinute = 60000;
 
+	/**
+	 * Gets a list of forex data points that satisfy the specified percent change
+	 * and time interval conditions
+	 * 
+	 * @param datapoints
+	 *            all data points
+	 * @param timeInterval
+	 *            increment to next data point
+	 * @param percentChange
+	 *            percent difference threshold between two data points
+	 * @return the data points we are interested in
+	 */
 	public static ArrayList<ForexDatapoint> getRelevantDatapoints(ArrayList<ForexDatapoint> datapoints,
 			int timeInterval, double percentChange) {
 		ArrayList<ForexDatapoint> filteredDatapoints = new ArrayList<ForexDatapoint>();

@@ -7,6 +7,12 @@ import java.util.Calendar;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * JUnit tests for ForexUtils class methods
+ * 
+ * @author Lina
+ *
+ */
 class ForexUtilsTest {
 
 	@Test

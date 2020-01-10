@@ -42,7 +42,7 @@ public class BrexitTwitterAnalysisMain {
 	 * points specified.
 	 * 
 	 * @param percentChange
-	 *            percent difference between two sequential forex data points
+	 *            percent difference between any two consecutive forex data points
 	 * @param timeFrame
 	 *            time frame since forex data points from which to query tweets
 	 * @param tweetFilename
