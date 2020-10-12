@@ -3,8 +3,8 @@ package utilities;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
@@ -22,7 +22,7 @@ class FileIOTest {
 	@Test
 	void testImportTweetFileReader() throws FileNotFoundException {
 		String filename = "testTweetFile.txt";
-		ArrayList<Tweet> tweets = FileIO.importTweetFileReader(filename);
+		List<Tweet> tweets = FileIO.importTweetFileReader(filename);
 		assertEquals(2, tweets.size());
 		assertEquals(
 				"RT @jpraffarin: La situation au levant vue par les dirigeants iraniens. Verbatim sur mon blog https://t.co/SSjl7TQ5KX",
@@ -49,9 +49,9 @@ class FileIOTest {
 	@Test
 	void testImportWordFileReader() throws FileNotFoundException {
 		String filename = "testWordFile.txt";
-		HashSet<String> words = FileIO.importWordFileReader(filename);
-		assertEquals(true, words.contains("Hello world!"));
-		assertEquals(true, words.contains("Goodbye world!"));
+		Set<String> words = FileIO.importWordFileReader(filename);
+		assertEquals(true, words.contains("hello world!"));
+		assertEquals(false, words.contains("Hello world!"));
 		assertEquals(2, words.size());
 	}
 
@@ -71,7 +71,7 @@ class FileIOTest {
 	@Test
 	void testImportForexDataFileReader() throws FileNotFoundException {
 		String filename = "testForexDataFile.csv";
-		ArrayList<ForexDatapoint> datapoints = FileIO.importForexDataFileReader(filename);
+		List<ForexDatapoint> datapoints = FileIO.importForexDataFileReader(filename);
 		assertEquals(2, datapoints.size());
 		assertEquals(1.473350, datapoints.get(1).getOpenBidQuote());
 	}

@@ -2,6 +2,7 @@ package forexhistoricaldata;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 /**
  * Class that contains methods to run forex data point queries
@@ -24,9 +25,9 @@ public class ForexUtils {
 	 *            percent difference threshold between two data points
 	 * @return the data points we are interested in
 	 */
-	public static ArrayList<ForexDatapoint> getRelevantDatapoints(ArrayList<ForexDatapoint> datapoints,
+	public static List<ForexDatapoint> getRelevantDatapoints(List<ForexDatapoint> datapoints,
 			int timeInterval, double percentChange) {
-		ArrayList<ForexDatapoint> filteredDatapoints = new ArrayList<ForexDatapoint>();
+		List<ForexDatapoint> filteredDatapoints = new ArrayList<ForexDatapoint>();
 
 		if (datapoints.size() > 0) {
 			Collections.sort(datapoints);

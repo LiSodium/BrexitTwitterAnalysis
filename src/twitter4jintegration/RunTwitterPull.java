@@ -1,7 +1,7 @@
 package twitter4jintegration;
 
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
+import java.util.List;
 
 import twitter4j.TwitterException;
 import utilities.FileIO;
@@ -18,8 +18,8 @@ public class RunTwitterPull {
 	public static void main(String[] args) {
 		try {
 			ReadConfigMain config = new ReadConfigMain();
-			ArrayList<TwitterUser> users = TwitterUtils.getUsers(config.getScreennames());
-			ArrayList<Tweet> tweets = TwitterUtils.getTweets(users, config.getSinceId(), config.getMaxId());
+			List<TwitterUser> users = TwitterUtils.getUsers(config.getScreennames());
+			List<Tweet> tweets = TwitterUtils.getTweets(users, config.getSinceId(), config.getMaxId());
 			FileIO.exportFileWriter(tweets, "tweets.txt");
 		} catch (TwitterException | FileNotFoundException e) {
 			e.printStackTrace();

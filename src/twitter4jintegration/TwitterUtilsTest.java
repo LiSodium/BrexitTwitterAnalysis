@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -36,7 +37,7 @@ class TwitterUtilsTest {
 	void testGetUsers() throws TwitterException {
 		String screennames = "theresa_may,BorisJohnson,jeremycorbyn";
 
-		ArrayList<TwitterUser> users = TwitterUtils.getUsers(screennames);
+		List<TwitterUser> users = TwitterUtils.getUsers(screennames);
 
 		assertEquals("Theresa May", users.get(0).getName());
 		assertEquals("", users.get(0).getLocation());
@@ -51,10 +52,10 @@ class TwitterUtilsTest {
 	@Test
 	void testGetTweetsSinceId() throws TwitterException {
 		TwitterUser u1 = new TwitterUser("BorisJohnson", null, 0, null);
-		ArrayList<TwitterUser> users = new ArrayList<TwitterUser>();
+		List<TwitterUser> users = new ArrayList<TwitterUser>();
 		users.add(u1);
-
-		ArrayList<Tweet> tweets = TwitterUtils.getTweets(users, 678912676806946816l, 688912676806946816l);
+		// May need to update since/ max id
+		List<Tweet> tweets = TwitterUtils.getTweets(users, 678912676806946816l, 688912676806946816l);
 
 		assertNotNull(tweets.get(0).getText());
 		assertNotNull(tweets.get(tweets.size() - 1).getText());
@@ -63,10 +64,10 @@ class TwitterUtilsTest {
 	@Test
 	void testGetTweetSinceId() throws TwitterException {
 		TwitterUser u1 = new TwitterUser("BorisJohnson", null, 0, null);
-		ArrayList<TwitterUser> users = new ArrayList<TwitterUser>();
+		List<TwitterUser> users = new ArrayList<TwitterUser>();
 		users.add(u1);
-
-		ArrayList<Tweet> tweets = TwitterUtils.getTweets(users, 678912676806946815l, 678912676806946817l);
+		// May need to update since/ max id
+		List<Tweet> tweets = TwitterUtils.getTweets(users, 678912676806946815l, 678912676806946817l);
 
 		boolean textFound = tweets.get(0).getText().contains("What if winter is over – for ever?");
 		assertEquals(true, textFound);
@@ -75,10 +76,10 @@ class TwitterUtilsTest {
 	@Test
 	void testGetEmptyTweetsSinceId() throws TwitterException {
 		TwitterUser u1 = new TwitterUser("BorisJohnson", null, 0, null);
-		ArrayList<TwitterUser> users = new ArrayList<TwitterUser>();
+		List<TwitterUser> users = new ArrayList<TwitterUser>();
 		users.add(u1);
 
-		ArrayList<Tweet> tweets = TwitterUtils.getTweets(users, 1l, 1l);
+		List<Tweet> tweets = TwitterUtils.getTweets(users, 1l, 1l);
 
 		assertEquals(0, tweets.size());
 	}

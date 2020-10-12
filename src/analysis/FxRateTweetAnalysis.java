@@ -3,8 +3,10 @@ package analysis;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import forexhistoricaldata.ForexDatapoint;
 import forexhistoricaldata.ForexUtils;
@@ -33,9 +35,9 @@ public class FxRateTweetAnalysis {
 	 * @return list of tweets created around the times when the FX rate changed
 	 *         significantly
 	 */
-	public static ArrayList<Tweet> getRelevantTweets(ArrayList<ForexDatapoint> timesOfInterest,
-			ArrayList<Tweet> allTweets, int timeIntervalInMinutes) {
-		ArrayList<Tweet> relevantTweets = new ArrayList<Tweet>();
+	public static List<Tweet> getRelevantTweets(List<ForexDatapoint> timesOfInterest,
+			List<Tweet> allTweets, int timeIntervalInMinutes) {
+		List<Tweet> relevantTweets = new ArrayList<Tweet>();
 		int timeIndex = 0;
 		int tweetIndex = 0;
 
@@ -64,8 +66,8 @@ public class FxRateTweetAnalysis {
 	 *            list of tweet objects
 	 * @return map of words and their frequencies
 	 */
-	public static HashMap<String, Integer> getWordFrequencyMap(ArrayList<Tweet> tweets, HashSet<String> commonWordSet) {
-		HashMap<String, Integer> wordFrequencyMap = new HashMap<String, Integer>();
+	public static Map<String, Integer> getWordFrequencyMap(List<Tweet> tweets, Set<String> commonWordSet) {
+		Map<String, Integer> wordFrequencyMap = new HashMap<String, Integer>();
 		for (Tweet tweet : tweets) {
 			String tweetText = tweet.getText();
 			String[] words = tweetText.split("[^A-Za-z']+"); // Keep English alphabet and apostrophe characters only
@@ -91,9 +93,9 @@ public class FxRateTweetAnalysis {
 	 *            map of words and their frequencies
 	 * @return list of words and their frequencies in descending order
 	 */
-	public static ArrayList<Entry<String, Integer>> getSortedWordFrequencyList(
-			HashMap<String, Integer> wordFrequencyMap) {
-		ArrayList<Entry<String, Integer>> entries = new ArrayList<Entry<String, Integer>>();
+	public static List<Entry<String, Integer>> getSortedWordFrequencyList(
+			Map<String, Integer> wordFrequencyMap) {
+		List<Entry<String, Integer>> entries = new ArrayList<Entry<String, Integer>>();
 		for (Entry<String, Integer> entry : wordFrequencyMap.entrySet()) {
 			entries.add(entry);
 		}

@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -35,14 +36,14 @@ class ForexUtilsTest {
 		ForexDatapoint d4 = new ForexDatapoint(c4, 1);
 		ForexDatapoint d5 = new ForexDatapoint(c5, 1);
 
-		ArrayList<ForexDatapoint> datapoints = new ArrayList<ForexDatapoint>();
+		List<ForexDatapoint> datapoints = new ArrayList<ForexDatapoint>();
 		datapoints.add(d1);
 		datapoints.add(d2);
 		datapoints.add(d3);
 		datapoints.add(d4);
 		datapoints.add(d5);
 
-		ArrayList<ForexDatapoint> datapointsWithinTimeCriteria = ForexUtils.getRelevantDatapoints(datapoints, 1, 0);
+		List<ForexDatapoint> datapointsWithinTimeCriteria = ForexUtils.getRelevantDatapoints(datapoints, 1, 0);
 
 		assertEquals(3, datapointsWithinTimeCriteria.size());
 	}
@@ -67,14 +68,14 @@ class ForexUtilsTest {
 		ForexDatapoint d4 = new ForexDatapoint(c4, 1.25);
 		ForexDatapoint d5 = new ForexDatapoint(c5, 2);
 
-		ArrayList<ForexDatapoint> datapoints = new ArrayList<ForexDatapoint>();
+		List<ForexDatapoint> datapoints = new ArrayList<ForexDatapoint>();
 		datapoints.add(d1);
 		datapoints.add(d2);
 		datapoints.add(d3);
 		datapoints.add(d4);
 		datapoints.add(d5);
 
-		ArrayList<ForexDatapoint> datapointsWithinPercentCriteria = ForexUtils.getRelevantDatapoints(datapoints, 1,
+		List<ForexDatapoint> datapointsWithinPercentCriteria = ForexUtils.getRelevantDatapoints(datapoints, 1,
 				0.10);
 
 		assertEquals(3, datapointsWithinPercentCriteria.size());

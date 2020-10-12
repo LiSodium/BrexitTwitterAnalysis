@@ -5,11 +5,11 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -54,19 +54,19 @@ public class BrexitTwitterAnalysisMain {
 	 * @return list of words meeting the criteria specified
 	 * @throws FileNotFoundException
 	 */
-	public static ArrayList<Entry<String, Integer>> runFxRateTweetAnalysis(double percentChange, int timeFrame,
+	public static List<Entry<String, Integer>> runFxRateTweetAnalysis(double percentChange, int timeFrame,
 			String tweetFilename, String wordFilename, String dataFilename) throws FileNotFoundException {
-		ArrayList<Tweet> tweets = FileIO.importTweetFileReader(tweetFilename);
-		ArrayList<ForexDatapoint> allDatapoints = FileIO.importForexDataFileReader(dataFilename);
-		ArrayList<ForexDatapoint> relevantDatapoints = ForexUtils.getRelevantDatapoints(allDatapoints, 1,
+		List<Tweet> tweets = FileIO.importTweetFileReader(tweetFilename);
+		List<ForexDatapoint> allDatapoints = FileIO.importForexDataFileReader(dataFilename);
+		List<ForexDatapoint> relevantDatapoints = ForexUtils.getRelevantDatapoints(allDatapoints, 1,
 				percentChange);
 
-		ArrayList<Tweet> tweetsOfInterest = FxRateTweetAnalysis.getRelevantTweets(relevantDatapoints, tweets,
+		List<Tweet> tweetsOfInterest = FxRateTweetAnalysis.getRelevantTweets(relevantDatapoints, tweets,
 				timeFrame);
 
-		HashSet<String> commonWordSet = FileIO.importWordFileReader(wordFilename);
-		HashMap<String, Integer> wordMap = FxRateTweetAnalysis.getWordFrequencyMap(tweetsOfInterest, commonWordSet);
-		ArrayList<Entry<String, Integer>> wordList = FxRateTweetAnalysis.getSortedWordFrequencyList(wordMap);
+		Set<String> commonWordSet = FileIO.importWordFileReader(wordFilename);
+		Map<String, Integer> wordMap = FxRateTweetAnalysis.getWordFrequencyMap(tweetsOfInterest, commonWordSet);
+		List<Entry<String, Integer>> wordList = FxRateTweetAnalysis.getSortedWordFrequencyList(wordMap);
 
 		return wordList;
 	}
@@ -168,7 +168,7 @@ public class BrexitTwitterAnalysisMain {
 				try {
 					percentChange = Double.parseDouble(textFieldPercentChange.getText());
 					timeFrame = Integer.parseInt(textFieldTimeFrame.getText());
-					ArrayList<Entry<String, Integer>> result = runFxRateTweetAnalysis(percentChange, timeFrame,
+					List<Entry<String, Integer>> result = runFxRateTweetAnalysis(percentChange, timeFrame,
 							"tweets.txt", "words.txt", "DAT_ASCII_GBPUSD_M1_2016.csv");
 					if (topResult > result.size()) {
 						topResult = result.size();

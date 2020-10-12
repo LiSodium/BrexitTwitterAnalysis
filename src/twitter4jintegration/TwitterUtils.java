@@ -30,8 +30,8 @@ public class TwitterUtils {
 	 * @return list of users with given screennames
 	 * @throws TwitterException
 	 */
-	public static ArrayList<TwitterUser> getUsers(String screennames) throws TwitterException {
-		ArrayList<TwitterUser> users = new ArrayList<TwitterUser>();
+	public static List<TwitterUser> getUsers(String screennames) throws TwitterException {
+		List<TwitterUser> users = new ArrayList<TwitterUser>();
 
 		for (User user : twitter.lookupUsers(screennames)) {
 			TwitterUser twitterUser = new TwitterUser(user);
@@ -52,9 +52,9 @@ public class TwitterUtils {
 	 * @return list of tweets by the given users between the given dates
 	 * @throws TwitterException
 	 */
-	public static ArrayList<Tweet> getTweets(ArrayList<TwitterUser> users, String startDate, String endDate)
+	public static List<Tweet> getTweets(List<TwitterUser> users, String startDate, String endDate)
 			throws TwitterException {
-		ArrayList<Tweet> tweets = new ArrayList<Tweet>();
+		List<Tweet> tweets = new ArrayList<Tweet>();
 
 		for (TwitterUser user : users) {
 			Query query = new Query("from:" + user.getScreenName());
@@ -83,9 +83,9 @@ public class TwitterUtils {
 	 * @return list of tweets by the given users between the given tweet ids
 	 * @throws TwitterException
 	 */
-	public static ArrayList<Tweet> getTweets(ArrayList<TwitterUser> users, long sinceId, long maxId)
+	public static List<Tweet> getTweets(List<TwitterUser> users, long sinceId, long maxId)
 			throws TwitterException {
-		ArrayList<Tweet> tweets = new ArrayList<Tweet>();
+		List<Tweet> tweets = new ArrayList<Tweet>();
 		Paging page = new Paging();
 		page.setCount(200);
 		page.setSinceId(sinceId);

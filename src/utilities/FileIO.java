@@ -8,8 +8,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map.Entry;
 import java.util.Scanner;
+import java.util.Set;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -26,17 +28,17 @@ import twitter4jintegration.Tweet;
 public class FileIO {
 	private static Gson gson = new Gson();
 
-	public static ArrayList<Tweet> importTweetFileReader(String filename) throws FileNotFoundException {
+	public static List<Tweet> importTweetFileReader(String filename) throws FileNotFoundException {
 		File importFile = new File(filename);
 		Scanner importReader = new Scanner(importFile);
 		String json = importReader.nextLine();
-		ArrayList<Tweet> tweets = gson.fromJson(json, new TypeToken<ArrayList<Tweet>>() {
+		List<Tweet> tweets = gson.fromJson(json, new TypeToken<List<Tweet>>() {
 		}.getType());
 		importReader.close();
 		return tweets;
 	}
 
-	public static void exportFileWriter(ArrayList<Tweet> tweets, String filename) throws FileNotFoundException {
+	public static void exportFileWriter(List<Tweet> tweets, String filename) throws FileNotFoundException {
 		PrintWriter exportFile;
 		exportFile = new PrintWriter(filename);
 		tweets.sort(null);
@@ -45,7 +47,7 @@ public class FileIO {
 		exportFile.close();
 	}
 
-	public static void exportResultsFileWriter(ArrayList<Entry<String, Integer>> wordList, String filename)
+	public static void exportResultsFileWriter(List<Entry<String, Integer>> wordList, String filename)
 			throws FileNotFoundException {
 		PrintWriter exportFile;
 		exportFile = new PrintWriter(filename);
@@ -57,10 +59,10 @@ public class FileIO {
 		exportFile.close();
 	}
 
-	public static HashSet<String> importWordFileReader(String filename) throws FileNotFoundException {
+	public static Set<String> importWordFileReader(String filename) throws FileNotFoundException {
 		File importFile = new File(filename);
 		Scanner importReader = new Scanner(importFile);
-		HashSet<String> words = new HashSet<String>();
+		Set<String> words = new HashSet<String>();
 		while (importReader.hasNextLine()) {
 			words.add(importReader.nextLine().toLowerCase());
 		}
@@ -68,10 +70,10 @@ public class FileIO {
 		return words;
 	}
 
-	public static ArrayList<ForexDatapoint> importForexDataFileReader(String filename) throws FileNotFoundException {
+	public static List<ForexDatapoint> importForexDataFileReader(String filename) throws FileNotFoundException {
 		File importFile = new File(filename);
 		Scanner importReader = new Scanner(importFile);
-		ArrayList<ForexDatapoint> datapoints = new ArrayList<ForexDatapoint>();
+		List<ForexDatapoint> datapoints = new ArrayList<ForexDatapoint>();
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd HHmmssZ");
 
 		while (importReader.hasNextLine()) {
